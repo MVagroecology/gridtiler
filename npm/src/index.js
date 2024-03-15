@@ -141,7 +141,9 @@ export default function (opts) {
                             const vs = []
                             for (let c of cA.cells) vs.push(c[k])
                             //compute and set aggregated value
-                            cA[k] = aggregateSum(vs)
+                            // needs an if here to accomodate another argument to select the SUM, MODE, AVG, MAX, MIN
+                            //cA[k] = aggregateSum(vs)
+                            cA[k] = aggregateMode(vs)
                             if (opts.aggregationRounding != undefined)
                                 cA[k] = roundToTolerance(cA[k])
                         }
