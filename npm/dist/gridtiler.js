@@ -12399,6 +12399,37 @@ __webpack_require__.r(__webpack_exports__);
 
                 //aggregation function
                 //TODO handle other cases: average, mode, etc
+                const aggregateMode = (vs) => {
+                  // Create a map to store the count of each value
+                  const countMap = new Map();
+                  
+                  // Count occurrences of each value
+                  for (let v of vs) {
+                      countMap.set(v, (countMap.get(v) || 0) + 1);
+                  }
+                  
+                  // Find the maximum occurrence
+                  let maxCount = 0;
+                  let mode = null;
+                  
+                  countMap.forEach((count, v) => {
+                      if (count > maxCount) {
+                          maxCount = count;
+                          mode = v;
+                      }
+                  });
+                  
+                  return mode;
+              };
+              const aggregateAverage = (vs) => {
+                  // Calculate the sum of all values
+                  const sum = vs.reduce((acc, val) => acc + val, 0);
+                  // Calculate the average
+                  const average = sum / vs.length;
+                  return average;
+              };
+              const aggregateMax = (vs) => { return Math.max(vs)}
+              const aggregateMin = (vs) => { return Math.min(vs)}
                 const aggregateSum = (vs) => { let sum = 0; for (let v of vs) { sum += +v; } return sum }
 
                 //aggregate cell values
@@ -12412,7 +12443,8 @@ __webpack_require__.r(__webpack_exports__);
                             const vs = []
                             for (let c of cA.cells) vs.push(c[k])
                             //compute and set aggregated value
-                            cA[k] = aggregateSum(vs)
+                            //cA[k] = aggregateSum(vs)
+                            cA[k] = aggregateMode(vs)
                         }
                         cA.cells = []; delete cA.cells
                         cells.push(cA)
