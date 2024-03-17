@@ -20,10 +20,10 @@
     "url": "https://github.com/eurostat/gridtiler/issues"
   },
   "type": "module",
-  "main": "dist/gridtiler.min.js",
-  "module": "dist/gridtiler.min.js",
+  "main": "dist/gridtiler.js",
+  "module": "dist/gridtiler.js",
   "exports": {
-    "umd": "./dist/gridtiler.min.js",
+    "umd": "./dist/gridtiler.js",
     "default": "./src/index.js"
   },
   "scripts": {
